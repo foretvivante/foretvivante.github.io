@@ -176,7 +176,8 @@
   <h2 class="text-3xl font-serif font-semibold pb-8" id="news">Actualités</h2>
   <div class="flex flex-col md:flex-row gap-4">
     <div class="flex flex-col gap-2 w-60 place-content-end">
-      <img src="/images/sortie_2024-09.png" alt="Sortie" class="w-full h-auto object-cover" />
+      {{ $sortie := resources.Get "images/sortie_2024-09.png" }}
+      {{ partial "img.html" (dict "image" $sortie "alt" "Sortie" "class" "w-full h-auto object-cover") }}
       <div>
         Prochaine sortie : dimanche 25 mai 2025, session ornithologie animée par une scientifique !
       </div>
@@ -185,8 +186,10 @@
       </p>
     </div>
     <div class="flex flex-col gap-2 w-60">
+      
       <a href="https://www.lefaucigny.fr/2025/02/16395/">
-        <img src="/images/faucigny_2025-02-21.jpg" alt="Faucigny" class="w-full h-auto object-cover" />
+        {{ $faucigny := resources.Get "images/faucigny_2025-02-21.jpg" }}
+      {{ partial "img.html" (dict "image" $faucigny "alt" "Faucigny" "class" "w-full h-auto object-cover") }}
       </a>
       <div class="underline"><a href="https://www.lefaucigny.fr/2025/02/16395/">Le Faucigny, 21 février 2025</a></div>
       <p>
