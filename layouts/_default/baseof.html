@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Title }}</title>
+  {{- if .IsHome -}}
+  <meta name="description" content="{{ site.Params.Description }}" />
+  {{- else -}}
+  <meta name="description" content="{{ .Params.Description }}" />
+  {{- end }}
+  {{- if isset .Params "canonical" -}}
+  <link rel="canonical" href="{{ .Params.canonical }}" />
+  {{- else -}}
+  <link rel="canonical" href="{{ .Permalink }}" />
+  {{- end }}
+  <meta name="keywords" content="{{ if site.Params.Keywords }}{{ delimit site.Params.Keywords " , " }}{{ end }}">
+  {{ hugo.Generator }}
+  {{ block "meta" . }}{{ end }}
+  {{ partialCached "css.html" . }}
+</head>
+
+<body class="antialiased">
+  <header class="fixed top-0 left-0 right-0 bg-white z-50">
+    <div class="container mx-auto max-w-5xl px-4">
+      {{ block "header" . }}
+      <nav class="flex items-center justify-between h-16">
+        <div class="hidden md:block">
+          <a href="/" class="text-xl font-serif font-bold text-gray-800 hover:text-gray-600 flex items-center gap-2">
+            Projet Forêt Vivante
+          </a>
+        </div>
+        <div class="flex items-center space-x-8">
+          <a href="#news" 
+          onclick="event.preventDefault(); document.querySelector('#news').scrollIntoView({behavior: 'smooth', block: 'start'}); window.scrollBy(0, -80);" 
+          class="text-gray-800 hover:text-gray-600 flex items-center gap-2">Actualités</a>
+          <div class="">
+            <a href="#soutenir" onclick="event.preventDefault(); document.querySelector('#soutenir').scrollIntoView({behavior: 'smooth', block: 'start'}); window.scrollBy(0, -80);" class="block bg-green-300 border border-green-400 uppercase font-bold text-sm text-green-900 tracking-tight rounded px-3 py-1.5 hover:text-green-700">
+              Nous soutenir
+            </a>
+          </div>
+        </div>
+      </nav>
+      {{ end }}
+    </div>
+  </header>
+  <div class="container mx-auto max-w-5xl px-4 pt-20">
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ block "footer" . }}{{ partialCached "footer.html" . }}{{ end }}
+  </div>
+</body>
+
+</html>
