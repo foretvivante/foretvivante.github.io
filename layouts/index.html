@@ -10,8 +10,8 @@
   <div class="flex flex-col gap-4">
     <div class="grid md:grid-cols-2 gap-4 md:gap-8">
       <div class="flex flex-col gap-2">
-        <img src="/images/sentier_larrieux.jpg" alt="Sentier d'accès au refuge de Larrieux par la forêt"
-          class="w-full h-full object-cover" />
+        {{ $sentier := resources.Get "images/sentier_larrieux.jpg" }}
+        {{ partial "img.html" (dict "image" $sentier "alt" "Sentier d'accès au refuge de Larrieux par la forêt" "class" "w-full h-full object-cover") }}
         <div class="text-sm text-gray-600 text-center">
           Sentier d'accès au refuge de Larrieux par la forêt
         </div>
@@ -161,15 +161,15 @@
         <div>
           <h3 class="font-serif text-xl font-bold">Le Groupement forestier Forêt Vivante Haute-Savoie</h3>
           <p>(GFV74 – statut « société civile ») est propriétaire des forêts et gère ce patrimoine. Il a été créé par
-            l’association Forêt Vivante. En souscrivant une ou plusieurs parts du groupement, il est possible de devenir
-            associé, et de bénéficier d’un droit de vote à l’assemblée générale. Afin d’éviter une prise de contrôle de
+            l'association Forêt Vivante. En souscrivant une ou plusieurs parts du groupement, il est possible de devenir
+            associé, et de bénéficier d'un droit de vote à l'assemblée générale. Afin d'éviter une prise de contrôle de
             la structure par un individu, le nombre de votes est limité à 10, quel que soit le nombre de parts détenues.
           </p>
         </div>
       </div>
     </div>
   </div>
-  <p>A noter qu’il est possible de devenir membre de l’association sans être nécessairement membre associé du GFV74 ; et
+  <p>A noter qu'il est possible de devenir membre de l'association sans être nécessairement membre associé du GFV74 ; et
     inversement.</p>
 </section>
 <section class="mb-16 bg-[#f6f5f2] p-4 rounded">
@@ -199,7 +199,7 @@
   <h2 id="soutenir" class="text-3xl font-serif font-bold pb-8">Nous soutenir</h2>
   <div>
     <p>
-      Que vous souhaitiez adhérer à l’association « Forêt Vivante » (20 euros par an) ou faire un don à l’association et participer au financement du projet, notamment des parcelles forestières : https://www.helloasso.com/associations/foret-vivante
+      Que vous souhaitiez adhérer à l'association « Forêt Vivante » (20 euros par an) ou faire un don à l'association et participer au financement du projet, notamment des parcelles forestières : https://www.helloasso.com/associations/foret-vivante
     </p>
     
 Pour devenir associé au sein du Groupement forestier : contact.gfv74@gmail.com

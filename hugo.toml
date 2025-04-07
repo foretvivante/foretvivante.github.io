@@ -8,6 +8,11 @@ enableRobotsTXT = true
     Description = "Projet Forêt Vivante"
     Keywords = ["forêt", "Thônes", "Tournette", "Montremont", "Talamarche", "sylviculture", "épicéa", "hêtre", "biodiversité", "association"]
 
+[imaging]
+    quality = 75
+    resampleFilter = "Lanczos"
+    anchor = "Smart"
+
 [build]
     [build.buildStats]
         enable = true

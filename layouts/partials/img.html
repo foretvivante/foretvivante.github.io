@@ -1,0 +1,39 @@
+{{ $img := .image }}
+{{ $alt := .alt }}
+{{ $class := .class }}
+
+{{ $small := $img.Resize "600x" }}
+{{ $medium := $img.Resize "1200x" }}
+{{ $large := $img.Resize "1800x" }}
+
+{{ $smallWebp := $img.Resize "600x webp" }}
+{{ $mediumWebp := $img.Resize "1200x webp" }}
+{{ $largeWebp := $img.Resize "1800x webp" }}
+
+<picture>
+    <source
+        media="(min-width: 1200px)"
+        srcset="{{ $largeWebp.RelPermalink }} 1x, {{ $mediumWebp.RelPermalink }} 2x"
+        type="image/webp"
+    >
+    <source
+        media="(min-width: 768px)"
+        srcset="{{ $mediumWebp.RelPermalink }} 1x, {{ $smallWebp.RelPermalink }} 2x"
+        type="image/webp"
+    >
+    <source
+        media="(min-width: 1200px)"
+        srcset="{{ $large.RelPermalink }} 1x, {{ $medium.RelPermalink }} 2x"
+    >
+    <source
+        media="(min-width: 768px)"
+        srcset="{{ $medium.RelPermalink }} 1x, {{ $small.RelPermalink }} 2x"
+    >
+    <img
+        src="{{ $small.RelPermalink }}"
+        alt="{{ $alt }}"
+        {{ with $class }}class="{{ . }}"{{ end }}
+        loading="lazy"
+        decoding="async"
+    >
+</picture> 
