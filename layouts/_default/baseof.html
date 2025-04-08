@@ -34,10 +34,10 @@
         </div>
         <div class="flex items-center space-x-8">
           <a href="#news" 
-          onclick="event.preventDefault(); document.querySelector('#news').scrollIntoView({behavior: 'smooth', block: 'start'}); window.scrollBy(0, -80);" 
+          onclick="event.preventDefault(); document.querySelector('#news').scrollIntoView({behavior: 'smooth', block: 'start'}).then(() => window.scrollBy(0, -80));" 
           class="text-gray-800 hover:text-gray-600 flex items-center gap-2">Actualités</a>
           <div class="">
-            <a href="#soutenir" onclick="event.preventDefault(); document.querySelector('#soutenir').scrollIntoView({behavior: 'smooth', block: 'start'}); window.scrollBy(0, -80);" class="block bg-green-300 border border-green-400 uppercase font-bold text-sm text-green-900 tracking-tight rounded px-3 py-1.5 hover:text-green-700">
+            <a href="#soutenir" onclick="event.preventDefault(); document.querySelector('#soutenir').scrollIntoView({behavior: 'smooth', block: 'start'}).then(() => window.scrollBy(0, -80));" class="block bg-green-300 border border-green-400 uppercase font-bold text-sm text-green-900 tracking-tight rounded px-3 py-1.5 hover:text-green-950">
               Nous soutenir
             </a>
           </div>
