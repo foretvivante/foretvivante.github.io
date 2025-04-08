@@ -32,6 +32,8 @@
     <img
         src="{{ $small.RelPermalink }}"
         alt="{{ $alt }}"
+        width="{{ $small.Width }}"
+        height="{{ $small.Height }}"
         {{ with $class }}class="{{ . }}"{{ end }}
         loading="lazy"
         decoding="async"
