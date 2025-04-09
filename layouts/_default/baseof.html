@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }}</title>
   {{- if .IsHome -}}
@@ -17,6 +16,8 @@
   <link rel="canonical" href="{{ .Permalink }}" />
   {{- end }}
   <meta name="keywords" content="{{ if site.Params.Keywords }}{{ delimit site.Params.Keywords " , " }}{{ end }}">
+  <link rel="icon" href="/favicon.ico" sizes="32x32"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/><!-- 180×180 -->
   {{ hugo.Generator }}
   {{ block "meta" . }}{{ end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">

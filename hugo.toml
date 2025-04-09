@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://foretvivante.fr/'
 defaultContentLanguage = 'fr'
 title = 'Forêt Vivante'
 disableKinds = ['taxonomy', 'term', 'section']
@@ -6,7 +6,7 @@ enableRobotsTXT = true
 
 [params]
     Description = "Projet Forêt Vivante"
-    Keywords = ["forêt", "Thônes", "Tournette", "Montremont", "Talamarche", "sylviculture", "épicéa", "hêtre", "biodiversité", "association"]
+    Keywords = ["Thônes", "Tournette", "Montremont", "Talamarche", "Haute Savoie", "forêt", "sylviculture", "épicéa", "hêtre", "biodiversité", "association"]
 
 [imaging]
     quality = 75
