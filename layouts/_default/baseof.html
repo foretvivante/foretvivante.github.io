@@ -40,7 +40,7 @@
         </div>
         <div class="flex items-center space-x-8">
           <a href="#news"
-            onclick="event.preventDefault(); document.querySelector('#news').scrollIntoView({behavior: 'smooth', block: 'start'}).then(() => window.scrollBy(0, -80));"
+            onclick="event.preventDefault(); const element = document.querySelector('#news'); const headerOffset = 64; const elementPosition = element.getBoundingClientRect().top; const offsetPosition = elementPosition + window.pageYOffset - headerOffset; window.scrollTo({top: offsetPosition, behavior: 'smooth'});"
             class="text-gray-800 hover:text-gray-600 flex items-center gap-2">Actualités</a>
           <div class="">
             <a href="#soutenir"
