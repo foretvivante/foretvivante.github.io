@@ -5,7 +5,7 @@ disableKinds = ['taxonomy', 'term']
 enableRobotsTXT = true
 
 [params]
-    Description = "Projet Forêt Vivante"
+    Description = "Projet Forêt Vivante. Gestion durable de la forêt. Sensibilisation. Observation. Acquisition de parcelles forestières en Haute-Savoie."
     Keywords = ["Thônes", "Tournette", "Montremont", "Talamarche", "Haute Savoie", "forêt", "sylviculture", "épicéa", "hêtre", "biodiversité", "association"]
 
 [imaging]
