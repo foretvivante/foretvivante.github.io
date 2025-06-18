@@ -1,9 +1,9 @@
 {{ define "main" }}
 
-<div class="py-10 md:py-32">
+<div class="px-4 py-10 md:py-32">
   <div class="text-center font-serif text-4xl font-bold pb-8">Projet Forêt Vivante</div>
   <h1 class="text-center text-2xl font-serif">Gestion durable de la forêt. Sensibilisation. Observation.<br />
-    Acquisition de parcelles forestières en Haute-Savoie <img src="/images/savoie.svg" alt="Logo Savoie"
+    Acquisition de parcelles forestières en Haute-Savoie <img src="/images/savoie.svg" alt="Savoie"
       class="h-4 w-auto inline-block" /></h1>
   <div class="mt-5 flex flex-col md:flex-row text-center md:text-left justify-center items-center gap-0">
     <div class="bg-yellow-200 py-1 px-2 rounded-sm md:rounded-r-none uppercase font-bold inline-flex items-center">
@@ -17,242 +17,244 @@
     </div>
   </div>
 </div>
-<section class="mb-16">
-  <div class="flex flex-col gap-4">
-    <div class="grid md:grid-cols-2 gap-4 md:gap-8">
-      <div class="flex flex-col gap-2">
-        {{ $sentier := resources.Get "images/sentier_larrieux.jpg" }}
-        {{ partial "img.html" (dict "image" $sentier "alt" "Sentier d'accès au refuge de Larrieux par la forêt" "class"
-        "w-full h-full object-cover") }}
-        <div class="text-sm text-gray-600 text-center">
-          Sentier d'accès au refuge de Larrieux par la forêt. Photo @J.-F. Joye
-        </div>
-      </div>
-      <div class="flex flex-col gap-2">
-        <h2 class="text-3xl font-serif font-bold">Nos fôrets</h2>
-        <div>
-          Nos forêts sont situées en vallée de Montremont, près de Thônes (Haute Savoie). La vallée est très sauvage,
-          encaissée et certaines parcelles montent quasiment jusqu'à l'alpage de Larrieux. La vallée cultive une forte
-          tradition sylvicole.
-        </div>
-        <div class="flex flex-row gap-2 mb-8">
-          <div class="inline-block text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">
-            Superficie : 13 ha
-          </div>
-          <div class="inline-block text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">
-            Acquisition : 2019
+<div class="flex flex-col gap-8 md:gap-16">
+  <section class="px-4">
+    <div class="flex flex-col gap-4">
+      <div class="grid md:grid-cols-2 gap-4 md:gap-8">
+        <div class="flex flex-col gap-2">
+          {{ $sentier := resources.Get "images/sentier_larrieux.jpg" }}
+          {{ partial "img.html" (dict "image" $sentier "alt" "Sentier d'accès au refuge de Larrieux par la forêt"
+          "class"
+          "w-full h-full object-cover") }}
+          <div class="text-sm text-gray-600 text-center">
+            Sentier d'accès au refuge de Larrieux par la forêt. Photo @J.-F. Joye
           </div>
         </div>
-        <div class="bg-yellow-50 p-4 rounded">
-          <p class="mb-4">
-            Nous avons besoin de votre aide pour acquérir 16 hectares de nouvelles parcelles de forêt, voisines de
-            celles déjà acquises. Merci !
-          </p>
-          <p class="mb-4">Montant collecté : <span class="font-bold">3 110€</span> pour un objectif de <span
-              class="font-bold">10 000€</span>.</p>
-          <p>
-            <a href="https://www.helloasso.com/associations/foret-vivante/collectes/acquisition-de-parcelles-boisees-a-thones"
-              class=" bg-yellow-100 border border-yellow-400 uppercase font-bold text-sm tracking-tight rounded px-3 py-1.5 hover:bg-yellow-200">
-              Appel au financement
-            </a>
-            <span class="text-sm text-yellow-900 font-bold px-2 py-1 rounded mr-2">
-              Plus que <span id="daysRemaining"></span> jours
-            </span>
-            <script>
-              function updateDaysRemaining() {
-                const deadline = new Date('2025-07-01');
-                const today = new Date();
-                const diffTime = deadline - today;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                document.getElementById('daysRemaining').textContent = diffDays;
-              }
-              updateDaysRemaining();
-            </script>
-          </p>
+        <div class="flex flex-col gap-2">
+          <h2 class="text-3xl font-serif font-bold">Nos fôrets</h2>
+          <div>
+            Nos forêts sont situées en vallée de Montremont, près de Thônes (Haute Savoie). La vallée est très sauvage,
+            encaissée et certaines parcelles montent quasiment jusqu'à l'alpage de Larrieux. La vallée cultive une forte
+            tradition sylvicole.
+          </div>
+          <div class="flex flex-row gap-2 mb-8">
+            <div class="inline-block text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">
+              Superficie : 13 ha
+            </div>
+            <div class="inline-block text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">
+              Acquisition : 2019
+            </div>
+          </div>
+          <div class="bg-yellow-50 p-4 rounded">
+            <p class="mb-4">
+              Nous avons besoin de votre aide pour acquérir 16 hectares de nouvelles parcelles de forêt, voisines de
+              celles déjà acquises. Merci !
+            </p>
+            <p class="mb-4">Montant collecté : <span class="font-bold">3 110€</span> pour un objectif de <span
+                class="font-bold">10 000€</span>.</p>
+            <p>
+              <a href="https://www.helloasso.com/associations/foret-vivante/collectes/acquisition-de-parcelles-boisees-a-thones"
+                class=" bg-yellow-100 border border-yellow-400 uppercase font-bold text-sm tracking-tight rounded px-3 py-1.5 hover:bg-yellow-200">
+                Appel au financement
+              </a>
+              <span class="text-sm text-yellow-900 font-bold px-2 py-1 rounded mr-2">
+                Plus que <span id="daysRemaining"></span> jours
+              </span>
+              <script>
+                function updateDaysRemaining() {
+                  const deadline = new Date('2025-07-01');
+                  const today = new Date();
+                  const diffTime = deadline - today;
+                  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                  document.getElementById('daysRemaining').textContent = diffDays;
+                }
+                updateDaysRemaining();
+              </script>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
-  </div>
-</section>
-<section class="mb-16 bg-[#f6f5f2] border border-gray-200 p-4 rounded" id="news">
-  <h2 class="text-3xl font-serif font-semibold pb-8">Actualités</h2>
-  <div class="flex flex-col md:flex-row gap-10 md:gap-2 place-items-start">
-    <div class="flex flex-col gap-2 md:w-60">
-      <div>
-        <a href="/files/essor_2025-05-01.pdf">
-          {{ $essor := resources.Get "images/essor_2025-05-01.jpg" }}
-          {{ partial "img.html"
-          (dict "image" $essor "alt" "Essor Savoyard" "class" "w-full h-32 object-cover object-top")
-          }}
-        </a>
-      </div>
-      <div>
-        <div class="pt-2 text-sm text-gray-600">1er mai 2025</div>
-        <div>Dans l'Essor Savoyard : <a href="/files/essor_2025-05-01.pdf" class="underline">"Ils veulent acheter une
-            parcelle de forêt pour y faire de la sylviculture douce"</a>.</div>
-      </div>
-      <p>
-        <span class="text-sm text-gray-600 bg-gray-200 px-2 py-1 rounded inline-block">Presse</span>
-      </p>
     </div>
-    <div class="flex flex-col gap-2 md:w-60 place-content-end">
-      {{ $sortie := resources.Get "images/sortie_2024-09.png" }}
-      {{ partial "img.html" (dict "image" $sortie "alt" "Sortie" "class" "w-full h-32 object-cover object-top") }}
-      <div>
-        <div class="pt-2 text-sm text-gray-600">27 mars 2025</div>
-        <div>Prochaine sortie : dimanche 25 mai 2025, session ornithologie animée par une scientifique !</div>
-      </div>
-      <p>
-        <span class="text-sm text-gray-600 bg-gray-200 px-2 py-1 rounded inline-block">Sortie</span>
-      </p>
+  </section>
+  <section class="bg-[#f6f5f2] border border-gray-200 p-4 rounded" id="news">
+    <div class="flex flex-row place-content-center justify-between gap-2">
+      <h2 class="text-3xl font-serif font-semibold pb-8">Dernières actualités</h2>
+      <a href="/actualites" class="hidden md:block underline">Voir toutes les actualités</a>
     </div>
-    <div class="flex flex-col gap-2 md:w-60">
-      <a href="https://www.lefaucigny.fr/2025/02/16395/">
-        {{ $faucigny := resources.Get "images/faucigny_2025-02-21.jpg" }}
-        {{ partial "img.html" (dict "image" $faucigny "alt" "Faucigny" "class" "w-full h-32 object-cover object-top") }}
-      </a>
-      <div>
-        <div class="pt-2 text-sm text-gray-600">21 février 2025</div>
-        <div>Le Faucigny public l'article <a href="https://www.lefaucigny.fr/2025/02/16395/" class="underline">"Acheter
-            des
-            fôrets
-            pour les préserver"</a>.</div>
-      </div>
-      <p>
-        <span class="text-sm text-gray-600 bg-gray-200 px-2 py-1 rounded inline-block">Presse</span>
-      </p>
-    </div>
-  </div>
-</section>
-<section class="mb-16">
-  <div class="flex flex-col md:flex-row gap-4">
-    <div class="md:basis-1/3">
-      <h2 class="text-3xl font-serif font-bold">Philosophie</h2>
-    </div>
-    <div class="md:basis-2/3">
-      <div class="md:columns-2 gap-4">
-        <p class="mb-4">
-          Forêt Vivante est un projet né fin 2019. Nous nous étions aperçus que beaucoup de monde souhaitait s'investir
-          davantage, directement et effectivement, dans la protection de l'environnement, sans trop savoir comment s'y
-          prendre. Nous avons choisi comme levier les actions en matière de bois et forêts, à la fois symboles d'une
-          nature riche mais menacée et dépositaires de fonctions écologiques, sociales et économiques variées. Nous
-          considérons que la forêt est un « bien commun » essentiel et qu'à ce titre, elle doit être aussi gérée par des
-          citoyen-nes engagé.es et porteurs d'une vision pour garantir la durabilité de la gestion forestière.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="mb-16">
-  <div class="flex flex-col md:flex-row gap-4">
-    <div class="md:basis-1/3">
-      <h2 class="text-3xl font-serif font-bold">Sylviculture douce<br />Biodiversité</h2>
-    </div>
-    <div class="md:basis-2/3">
-      <div class="md:columns-2 gap-4">
-        <p class="mb-4">
-          Notre projet n'a de visée ni spéculative, ni lucrative alors que la tendance actuelle est à
-          l'industrialisation croissante de l'exploitation des forêts. Nous souhaitons pratiquer un véritable
-          discernement dans l'activité forestière. Là où l'exploitation se justifierait, nous prônons une sylviculture
-          douce en lien avec les acteurs de la filière bois locale, respectueuse du vivant. D'autres espaces sont
-          laissés en libre évolution, certains sont utiles à la prévention des risques naturels. Enfin, des sous-bois
-          sont des lieux de passage des randonneurs et touristes jusqu'à un bel alpage. Une attention particulière est
-          portée au maintien de la biodiversité forestière, confrontée notamment au réchauffement climatique. Nous
-          contribuons également aux réflexions sur l'accès du public aux lieux afin de trouver un équilibre entre
-          fréquentation bienfaisante de la forêt et respect de la tranquillité de la faune et de la flore ou encore des
-          pratiques pastorales. Nous promouvons enfin la mise en œuvre d'activités pédagogiques (écoles, éco-musée). Il
-          s'agit ainsi avec éthique de prendre résolument soin du territoire avec l'ensemble des acteurs locaux, qu'il
-          s'agisse des habitants ou des collectivités et organismes publics ou privés.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="mb-16">
-  <div class="flex flex-col md:flex-row gap-4">
-    <div class="md:basis-1/3">
-      <h2 class="text-3xl font-serif font-bold">Chasse</h2>
-    </div>
-    <div class="md:basis-2/3">
-      <div class="md:columns-2 gap-4">
-        <p class="mb-4">
-          Nous dénonçons les problèmes de sécurité vis-à-vis des promeneurs, la chasse d'espèces protégées, les
-          pratiques barbares (vénerie sous terre). Afin d'éviter ces abus, nous souhaiterions limiter au maximum les
-          activités de chasse sur nos parcelles voire réfléchir à placer en réserve de chasse et de faune sauvage
-          certaines parties de la forêt dans le cadre d'un dialogue avec les autorités cynégétiques.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="mb-16">
-  <div class="flex flex-col md:flex-row gap-4">
-    <div class="md:basis-1/3">
-      <h2 class="text-3xl font-serif font-bold">Volet scientifique</h2>
-    </div>
-    <div class="md:basis-2/3">
-      <div class="md:columns-2 gap-4">
-        <p class="mb-4">
-          Pour mettre en œuvre nos actions nous collaborons avec des spécialistes pluridisciplinaires, juristes,
-          naturalistes et forestiers, etc., qu'ils relèvent des milieux académiques ou d'instances associatives.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="mb-16">
-  <div class="flex flex-col gap-2">
-    {{ $image := resources.Get "images/20240901_121839.jpg" }}
-    {{ partial "img.html" (dict "image" $image "alt" "Vue" "class" "w-full h-auto object-cover") }}
-    <div class="text-sm text-gray-600 text-center">
-      Photo @J.-F. Joye
-    </div>
-  </div>
-</section>
-<section class="mb-16">
-  <div class="flex flex-col md:flex-row gap-4">
-    <div class="md:basis-1/3">
-      <h2 class="text-3xl font-serif font-bold">Organisation</h2>
-      <p>Le projet se repose sur deux entités afin d'assurer au projet la robustesse apte à satisfaire les besoins
-        présents et futurs.</p>
-    </div>
-    <div class="md:basis-2/3">
-      <div class="grid md:grid-cols-2 gap-4 pb-4">
+    <div class="flex flex-col md:flex-row gap-10 md:gap-4 place-items-start">
+      {{ range first 3 (where .Site.RegularPages "Section" "actualites") }}
+      <div class="flex flex-col gap-2 md:basis-1/3">
         <div>
-          <h3 class="font-serif text-xl font-bold">L'association Forêt Vivante</h3>
-          <p>(statut « Loi 1901 ») anime le projet et garantit la pérennité de sa philosophie ; elle dispose de la
-            majorité des parts dans le groupement forestier et en assure la gérance. Tout personne motivée par le
-            projet peut y adhérer.</p>
+          {{ $newsImage := resources.Get (printf "images/%s" .Params.image) }}
+
+          {{ if and $newsImage .Params.imageLink }}
+          <a href="{{ .Params.imageLink }}">
+            {{ partial "img.html"
+            (dict "image" $newsImage
+            "alt" .Params.image
+            "class" "w-full h-48 object-cover object-top border border-gray-200")
+            }}
+          </a>
+          {{ else if $newsImage }}
+          {{ partial "img.html"
+          (dict "image" $newsImage
+          "alt" .Params.image
+          "class" "w-full h-48 object-cover object-top border border-gray-200")
+          }}
+          {{ end }}
         </div>
         <div>
-          <h3 class="font-serif text-xl font-bold">Le Groupement forestier Forêt Vivante Haute-Savoie</h3>
-          <p>(GFV74 – statut « société civile ») est propriétaire des forêts et gère ce patrimoine. Il a été créé par
-            l'association Forêt Vivante. En souscrivant une ou plusieurs parts du groupement, il est possible de devenir
-            associé, et de bénéficier d'un droit de vote à l'assemblée générale. Afin d'éviter une prise de contrôle de
-            la structure par un individu, le nombre de votes est limité à 10, quel que soit le nombre de parts détenues.
+          <div class="pt-2 text-sm text-gray-600">{{ .Date | time.Format "2 January 2006" }}</div>
+          <div class="prose prose-p:text-black prose-a:underline">{{ .Summary }}</div>
+          {{ if .Truncated }}
+          <div class="mt-2 text-gray-600">
+            <a href="/actualites?#{{ .File.ContentBaseName }}" class="underline">Lire la suite</a> →
+          </div>
+          {{ end }}
+        </div>
+
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  <section class="px-4">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="md:basis-1/3">
+        <h2 class="text-3xl font-serif font-bold">Philosophie</h2>
+      </div>
+      <div class="md:basis-2/3">
+        <div class="md:columns-2 gap-4">
+          <p class="mb-4">
+            Forêt Vivante est un projet né fin 2019. Nous nous étions aperçus que beaucoup de monde souhaitait
+            s'investir
+            davantage, directement et effectivement, dans la protection de l'environnement, sans trop savoir comment s'y
+            prendre. Nous avons choisi comme levier les actions en matière de bois et forêts, à la fois symboles d'une
+            nature riche mais menacée et dépositaires de fonctions écologiques, sociales et économiques variées. Nous
+            considérons que la forêt est un « bien commun » essentiel et qu'à ce titre, elle doit être aussi gérée par
+            des
+            citoyen-nes engagé.es et porteurs d'une vision pour garantir la durabilité de la gestion forestière.
           </p>
         </div>
       </div>
     </div>
-  </div>
-  <p>A noter qu'il est possible de devenir membre de l'association sans être nécessairement membre associé du GFV74 ; et
-    inversement.</p>
-</section>
-<section class="mb-16 bg-green-100 border border-green-300 p-4 rounded-sm">
-  <h2 id="soutenir" class="text-3xl text-green-900 font-serif font-bold pb-8">Nous soutenir</h2>
-  <div>
-    <p class="mb-2">
-      Vous pouvez :
-    <ul class="list-disc list-inside mb-2 ml-4">
-      <li>adhérer à l'association « Forêt Vivante » (20 euros par an) ou faire un don à l'association pour participer au
-        financement du projet : <a href="https://www.helloasso.com/associations/foret-vivante"
-          class="underline">https://www.helloasso.com/associations/foret-vivante</a></li>
-      <li>devenir associé au sein du Groupement Forestier en nous envoyant un email à <a
-          href="mailto:contact.gfv74@gmail.com" class="underline">contact.gfv74@gmail.com</a></li>
-    </ul>
-    </p>
-    <p>Merci de votre soutien !</p>
-  </div>
-</section>
-{{ end }}
+  </section>
+  <section class="px-4">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="md:basis-1/3">
+        <h2 class="text-3xl font-serif font-bold">Sylviculture douce<br />Biodiversité</h2>
+      </div>
+      <div class="md:basis-2/3">
+        <div class="md:columns-2 gap-4">
+          <p class="mb-4">
+            Notre projet n'a de visée ni spéculative, ni lucrative alors que la tendance actuelle est à
+            l'industrialisation croissante de l'exploitation des forêts. Nous souhaitons pratiquer un véritable
+            discernement dans l'activité forestière. Là où l'exploitation se justifierait, nous prônons une sylviculture
+            douce en lien avec les acteurs de la filière bois locale, respectueuse du vivant. D'autres espaces sont
+            laissés en libre évolution, certains sont utiles à la prévention des risques naturels. Enfin, des sous-bois
+            sont des lieux de passage des randonneurs et touristes jusqu'à un bel alpage. Une attention particulière est
+            portée au maintien de la biodiversité forestière, confrontée notamment au réchauffement climatique. Nous
+            contribuons également aux réflexions sur l'accès du public aux lieux afin de trouver un équilibre entre
+            fréquentation bienfaisante de la forêt et respect de la tranquillité de la faune et de la flore ou encore
+            des
+            pratiques pastorales. Nous promouvons enfin la mise en œuvre d'activités pédagogiques (écoles, éco-musée).
+            Il
+            s'agit ainsi avec éthique de prendre résolument soin du territoire avec l'ensemble des acteurs locaux, qu'il
+            s'agisse des habitants ou des collectivités et organismes publics ou privés.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="px-4">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="md:basis-1/3">
+        <h2 class="text-3xl font-serif font-bold">Chasse</h2>
+      </div>
+      <div class="md:basis-2/3">
+        <div class="md:columns-2 gap-4">
+          <p class="mb-4">
+            Nous dénonçons les problèmes de sécurité vis-à-vis des promeneurs, la chasse d'espèces protégées, les
+            pratiques barbares (vénerie sous terre). Afin d'éviter ces abus, nous souhaiterions limiter au maximum les
+            activités de chasse sur nos parcelles voire réfléchir à placer en réserve de chasse et de faune sauvage
+            certaines parties de la forêt dans le cadre d'un dialogue avec les autorités cynégétiques.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="px-4">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="md:basis-1/3">
+        <h2 class="text-3xl font-serif font-bold">Volet scientifique</h2>
+      </div>
+      <div class="md:basis-2/3">
+        <div class="md:columns-2 gap-4">
+          <p class="mb-4">
+            Pour mettre en œuvre nos actions nous collaborons avec des spécialistes pluridisciplinaires, juristes,
+            naturalistes et forestiers, etc., qu'ils relèvent des milieux académiques ou d'instances associatives.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="">
+    <div class="flex flex-col gap-2">
+      {{ $image := resources.Get "images/20240901_121839.jpg" }}
+      {{ partial "img.html" (dict "image" $image "alt" "Vue" "class" "w-full h-auto object-cover") }}
+      <div class="text-sm text-gray-600 text-center">
+        Photo @J.-F. Joye
+      </div>
+    </div>
+  </section>
+  <section class="px-4">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="md:basis-1/3">
+        <h2 class="text-3xl font-serif font-bold">Organisation</h2>
+        <p>Le projet se repose sur deux entités afin d'assurer au projet la robustesse apte à satisfaire les besoins
+          présents et futurs.</p>
+      </div>
+      <div class="md:basis-2/3">
+        <div class="grid md:grid-cols-2 gap-4 pb-4">
+          <div>
+            <h3 class="font-serif text-xl font-bold">L'association Forêt Vivante</h3>
+            <p>(statut « Loi 1901 ») anime le projet et garantit la pérennité de sa philosophie ; elle dispose de la
+              majorité des parts dans le groupement forestier et en assure la gérance. Tout personne motivée par le
+              projet peut y adhérer.</p>
+          </div>
+          <div>
+            <h3 class="font-serif text-xl font-bold">Le Groupement forestier Forêt Vivante Haute-Savoie</h3>
+            <p>(GFV74 – statut « société civile ») est propriétaire des forêts et gère ce patrimoine. Il a été créé par
+              l'association Forêt Vivante. En souscrivant une ou plusieurs parts du groupement, il est possible de
+              devenir
+              associé, et de bénéficier d'un droit de vote à l'assemblée générale. Afin d'éviter une prise de contrôle
+              de
+              la structure par un individu, le nombre de votes est limité à 10, quel que soit le nombre de parts
+              détenues.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>A noter qu'il est possible de devenir membre de l'association sans être nécessairement membre associé du GFV74 ;
+      et
+      inversement.</p>
+  </section>
+  <section class="px-4 bg-green-100 border border-green-300 p-4 rounded-sm" id="soutenir">
+    <h2 class="text-3xl text-green-900 font-serif font-bold pb-8">Nous soutenir</h2>
+    <div>
+      <p class="mb-2">
+        Vous pouvez :
+      <ul class="list-disc list-inside mb-2 ml-4">
+        <li>adhérer à l'association « Forêt Vivante » (20 euros par an) ou faire un don à l'association pour participer
+          au
+          financement du projet : <a href="https://www.helloasso.com/associations/foret-vivante"
+            class="underline">https://www.helloasso.com/associations/foret-vivante</a></li>
+        <li>devenir associé au sein du Groupement Forestier en nous envoyant un email à <a
+            href="mailto:contact.gfv74@gmail.com" class="underline">contact.gfv74@gmail.com</a></li>
+      </ul>
+      </p>
+      <p>Merci de votre soutien !</p>
+    </div>
+  </section>
+  {{ end }}

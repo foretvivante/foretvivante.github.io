@@ -1,0 +1,12 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+This project is a static website generated with Hugo (see https://gohugo.io), the static site generator written in Go lang.
+
+It is available only in French. It contains only 2 pages: the index and the news (path is `/actualites`). News are stored in the directory `content/actualites`.
+
+The livrary TailwindCSS version 4 is used to declare and generate CSS. Use Tailwind instead of raw CSS whenever possible.
+
+The rendering is responsive. 

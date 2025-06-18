@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="container mx-auto px-4 pb-8">
+  <h1 class="text-3xl font-serif font-semibold pb-8">Actualités</h1>
+  <div class="space-y-12">
+    {{ range .Pages.ByDate.Reverse }}
+    <article class="space-y-1 flex flex-col md:flex-row md:gap-5 scroll-mt-20" id="{{ .File.ContentBaseName }}">
+      {{ if .Params.image }}
+      <div class="w-full md:basis-2/5">
+        {{ $newsImage := resources.Get (printf "images/%s" .Params.image) }}
+
+        {{ if and $newsImage .Params.imageLink }}
+        <a href="{{ .Params.imageLink }}">
+          {{ partial "img.html"
+          (dict "image" $newsImage
+          "alt" .Params.image
+          "class" "w-full h-auto object-cover object-top border border-gray-200")
+          }}
+        </a>
+        {{ else if $newsImage }}
+        {{ partial "img.html"
+        (dict "image" $newsImage
+        "alt" .Params.image
+        "class" "w-full h-auto object-cover object-top border border-gray-200")
+        }}
+        {{ end }}
+      </div>
+      {{ end }}
+      <div class="{{ if .Params.image }}md:basis-3/5{{ else }}w-full{{ end }} flex flex-col pt-1 md:pt-0 gap-1">
+        <div>
+          <a href="#{{ .File.ContentBaseName }}" class="text-sm text-gray-600 hover:underline">
+            {{ .Date | time.Format "2 January 2006"}}
+          </a>
+        </div>
+        <div class="prose prose-p:text-black prose-a:underline">
+          {{ .Content }}
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

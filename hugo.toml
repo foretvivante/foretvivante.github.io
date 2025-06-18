@@ -1,7 +1,7 @@
 baseURL = 'https://foretvivante.fr/'
 defaultContentLanguage = 'fr'
 title = 'Forêt Vivante'
-disableKinds = ['taxonomy', 'term', 'section']
+disableKinds = ['taxonomy', 'term']
 enableRobotsTXT = true
 
 [params]
@@ -18,9 +18,6 @@ enableRobotsTXT = true
         enable = true
     [[build.cachebusters]]
         source = 'assets/notwatching/hugo_stats\.json'
-        target = 'css'
-    [[build.cachebusters]]
-        source = '(postcss|tailwind)\.config\.js'
         target = 'css'
 [module]
     [[module.mounts]]

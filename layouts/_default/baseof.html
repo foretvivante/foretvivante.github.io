@@ -30,36 +30,80 @@
 
 <body class="antialiased">
   <header class="fixed top-0 left-0 right-0 bg-white z-50">
-    <div class="container mx-auto max-w-5xl px-4">
+    <div class="container mx-auto max-w-5xl">
       {{ block "header" . }}
-      <nav class="flex items-center justify-between h-16">
-        <div class="hidden md:block">
-          <a href="/" class="text-xl font-serif font-bold text-gray-800 hover:text-gray-600 flex items-center gap-2">
-            Projet Forêt Vivante
+      <nav class="flex flex-row items-center justify-between border-b md:border-b-0 border-gray-200 py-2 px-4 gap-2">
+        <div>
+          <a href="/" class="text-xl font-serif font-bold text-gray-800 hover:text-gray-600">
+            <img src="/images/savoie.svg" alt="Savoie"
+              class="md:hidden h-4 w-auto inline-block" /> Projet Forêt Vivante
           </a>
         </div>
-        <div class="flex items-center space-x-8">
-          <a href="#news"
-            onclick="event.preventDefault(); const element = document.querySelector('#news'); const headerOffset = 64; const elementPosition = element.getBoundingClientRect().top; const offsetPosition = elementPosition + window.pageYOffset - headerOffset; window.scrollTo({top: offsetPosition, behavior: 'smooth'});"
-            class="text-gray-800 hover:text-gray-600 flex items-center gap-2">Actualités</a>
-          <div class="">
-            <a href="#soutenir"
-              onclick="event.preventDefault(); document.querySelector('#soutenir').scrollIntoView({behavior: 'smooth', block: 'start'}).then(() => window.scrollBy(0, -80));"
-              class="block bg-green-100 border border-green-400 uppercase font-bold text-sm text-green-900 tracking-tight rounded px-3 py-1.5 hover:bg-green-200">
-              Nous soutenir
-            </a>
-          </div>
+        <div class="flex flex-row items-center gap-4">
+          <a href="/actualites"
+            class="text-gray-800 underline hover:text-gray-600 flex items-center gap-2">Actualités</a>
+          {{ if .IsHome }}
+          <a href="#soutenir"
+            onclick="event.preventDefault(); document.querySelector('#soutenir').scrollIntoView({behavior: 'smooth', block: 'start'}).then(() => window.scrollBy(0, -80));"
+            class="hidden md:block bg-green-100 border border-green-400 uppercase font-bold text-nowrap text-sm text-green-900 tracking-tight rounded px-2 py-1.5 hover:bg-green-200">
+            Nous soutenir
+          </a>
+          {{ else }}
+          <a href="/#soutenir"
+            class="hidden md:block bg-green-100 border border-green-400 uppercase font-bold text-nowrap text-sm text-green-900 tracking-tight rounded px-2 py-1.5 hover:bg-green-200">
+            Nous soutenir
+          </a>
+          {{ end }}
         </div>
       </nav>
       {{ end }}
     </div>
   </header>
-  <div class="container mx-auto max-w-5xl px-4 pt-20">
+  <div class="container mx-auto max-w-5xl pt-20">
     <main>
       {{ block "main" . }}{{ end }}
     </main>
     {{ block "footer" . }}{{ partialCached "footer.html" . }}{{ end }}
   </div>
+  </div>
+
+  <!-- Sticky "Nous soutenir" button for all pages -->
+  <div id="sticky-soutenir"
+    class="fixed bottom-0 left-0 md:hidden right-0 h-14 z-50 flex items-center justify-center w-full bg-white border-t border-gray-200">
+    <a href="/#soutenir"
+      class="bg-green-100 border border-green-400 uppercase font-bold text-nowrap text-sm text-green-900 tracking-tight rounded px-3 py-2 hover:bg-green-200 shadow-lg">
+      Nous soutenir
+    </a>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const stickyDiv = document.getElementById('sticky-soutenir');
+      const soutenirSection = document.getElementById('soutenir');
+
+      // Only run visibility detection on the home page where the soutenir section exists
+      if (!stickyDiv || !soutenirSection || window.location.pathname !== '/') {
+        return;
+      }
+
+      function checkVisibility() {
+        const rect = soutenirSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+        if (isVisible) {
+          stickyDiv.classList.add('hidden');
+        } else {
+          stickyDiv.classList.remove('hidden');
+        }
+      }
+
+      // Check on scroll
+      window.addEventListener('scroll', checkVisibility);
+
+      // Check on page load
+      checkVisibility();
+    });
+  </script>
 </body>
 
 </html>
