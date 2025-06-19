@@ -23,9 +23,11 @@
       <div class="grid md:grid-cols-2 gap-4 md:gap-8">
         <div class="flex flex-col gap-2">
           {{ $sentier := resources.Get "images/sentier_larrieux.jpg" }}
-          {{ partial "img.html" (dict "image" $sentier "alt" "Sentier d'accès au refuge de Larrieux par la forêt"
-          "class"
-          "w-full h-full object-cover") }}
+          {{ partial "img.html" (dict
+          "image" $sentier
+          "alt" "Sentier d'accès au refuge de Larrieux par la forêt"
+          "loading" "eager"
+          "class" "w-full h-full object-cover") }}
           <div class="text-sm text-gray-600 text-center">
             Sentier d'accès au refuge de Larrieux par la forêt. Photo @J.-F. Joye
           </div>

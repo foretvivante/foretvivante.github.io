@@ -1,6 +1,7 @@
 {{ $img := .image }}
 {{ $alt := .alt }}
 {{ $class := .class }}
+{{ $loading := .loading | default "lazy" }}
 
 {{ $small := $img.Resize "300x" }}
 {{ $medium := $img.Resize "600x" }}
@@ -36,6 +37,6 @@
     width="{{ $small.Width }}"
     height="{{ $small.Height }}"
     {{ with $class }}class="{{ . }}" {{ end }}
-    loading="lazy"
+    loading="{{ $loading }}"
     decoding="async">
 </picture>
