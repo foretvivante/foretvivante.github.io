@@ -11,31 +11,26 @@
 {{ $largeWebp := $img.Resize "1800x webp" }}
 
 <picture>
-    <source
-        media="(min-width: 1200px)"
-        srcset="{{ $largeWebp.RelPermalink }} 1x, {{ $mediumWebp.RelPermalink }} 2x"
-        type="image/webp"
-    >
-    <source
-        media="(min-width: 768px)"
-        srcset="{{ $mediumWebp.RelPermalink }} 1x, {{ $smallWebp.RelPermalink }} 2x"
-        type="image/webp"
-    >
-    <source
-        media="(min-width: 1200px)"
-        srcset="{{ $large.RelPermalink }} 1x, {{ $medium.RelPermalink }} 2x"
-    >
-    <source
-        media="(min-width: 768px)"
-        srcset="{{ $medium.RelPermalink }} 1x, {{ $small.RelPermalink }} 2x"
-    >
-    <img
-        src="{{ $small.RelPermalink }}"
-        alt="{{ $alt }}"
-        width="{{ $small.Width }}"
-        height="{{ $small.Height }}"
-        {{ with $class }}class="{{ . }}"{{ end }}
-        loading="lazy"
-        decoding="async"
-    >
-</picture> 
+  <source
+    media="(min-width: 1200px)"
+    srcset="{{ $mediumWebp.RelPermalink }} 1x, {{ $largeWebp.RelPermalink }} 2x"
+    type="image/webp">
+  <source
+    media="(min-width: 768px)"
+    srcset="{{ $smallWebp.RelPermalink }} 1x, {{ $mediumWebp.RelPermalink }} 2x"
+    type="image/webp">
+  <source
+    media="(min-width: 1200px)"
+    srcset="{{ $medium.RelPermalink }} 1x, {{ $large.RelPermalink }} 2x">
+  <source
+    media="(min-width: 768px)"
+    srcset="{{ $small.RelPermalink }} 1x, {{ $medium.RelPermalink }} 2x">
+  <img
+    src="{{ $small.RelPermalink }}"
+    alt="{{ $alt }}"
+    width="{{ $small.Width }}"
+    height="{{ $small.Height }}"
+    {{ with $class }}class="{{ . }}" {{ end }}
+    loading="lazy"
+    decoding="async">
+</picture>
