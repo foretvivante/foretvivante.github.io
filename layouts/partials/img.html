@@ -14,6 +14,9 @@
 
 <picture>
   <source
+    srcset="{{ $smallWebp.RelPermalink }} 1x, {{ $mediumWebp.RelPermalink }} 2x"
+    type="image/webp">
+  <source
     media="(min-width: 1200px)"
     srcset="{{ $largeWebp.RelPermalink }} 1x, {{ $xlargeWebp.RelPermalink }} 2x"
     type="image/webp">
@@ -28,7 +31,7 @@
     media="(min-width: 768px)"
     srcset="{{ $medium.RelPermalink }} 1x, {{ $large.RelPermalink }} 2x">
   <img
-    src="{{ $small.RelPermalink }}"
+    src="{{ $smallWebp.RelPermalink }}"
     alt="{{ $alt }}"
     width="{{ $small.Width }}"
     height="{{ $small.Height }}"
