@@ -16,6 +16,15 @@
   <link rel="canonical" href="{{ .Permalink }}" />
   {{- end }}
   <meta name="keywords" content="{{ if site.Params.Keywords }}{{ delimit site.Params.Keywords " , " }}{{ end }}">
+
+  <!-- Open Graph meta properties -->
+  <meta property="og:locale" content="{{ .Site.Language.Lang }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+  <meta property="og:description"
+    content="{{ if .IsHome }}{{ site.Params.Description }}{{ else }}{{ .Params.Description }}{{ end }}">
+  <meta property="og:site_name" content="Projet Forêt Vivante">
+
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" /><!-- 180×180 -->
   {{ hugo.Generator }}
