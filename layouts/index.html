@@ -28,12 +28,19 @@
             encaissée et certaines parcelles montent quasiment jusqu'à l'alpage de Larrieux. La vallée cultive une forte
             tradition sylvicole.
           </div>
-          <div class="flex flex-row gap-2 mb-8">
-            <div class="inline-block text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">
-              Superficie : 13 ha
+          <div class="flex flex-row gap-2 flex-wrap mb-2">
+            <div class="inline-block text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded text-nowrap">
+              Superficie : 30 ha
             </div>
-            <div class="inline-block text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">
-              Acquisition : 2019
+            <div class="inline-block text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded text-nowrap">
+              Acquisition : 2019, 2020 et 2025
+            </div>
+          </div>
+          <div class="mb-8">
+            {{ $map := resources.Get "images/montremont.jpg" }}
+            <div onclick="openModal('{{ $map.RelPermalink }}', 'Carte de la vallée de Montremont')"
+              class="cursor-pointer hover:opacity-90 transition-opacity">
+              {{ partial "img.html" (dict "image" $map "alt" "Vue" "class" "w-full h-auto object-cover") }}
             </div>
           </div>
         </div>

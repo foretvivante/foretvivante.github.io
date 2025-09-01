@@ -76,6 +76,20 @@
     </a>
   </div>
 
+  <!-- Modal -->
+  <div id="imageModal" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-black/90" onclick="closeModal()"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+      <div class="relative max-w-7xl max-h-[90vh] pointer-events-auto">
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain">
+        <button onclick="closeModal()"
+          class="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold shadow-lg hover:cursor-pointer">
+          ×
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const stickyDiv = document.getElementById('sticky-soutenir');
@@ -102,6 +116,30 @@
 
       // Check on page load
       checkVisibility();
+    });
+
+    // Modal functions
+    function openModal(imageSrc, imageAlt) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+
+      modalImage.src = imageSrc;
+      modalImage.alt = imageAlt;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
     });
   </script>
 </body>
