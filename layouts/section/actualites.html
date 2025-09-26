@@ -15,15 +15,15 @@
             {{ partial "img.html"
             (dict "image" $newsImage
             "alt" .Params.image
-            "class" "w-full h-auto object-cover object-top border border-gray-200")
+            "class" "w-full h-auto object-cover object-top border border-gray-200 cursor-pointer"
+            "onclick" (printf "openModal('%s', '%s')" $newsImage.RelPermalink .Params.image))
             }}
           </a>
           {{ else if $newsImage }}
-          {{ partial "img.html"
-          (dict "image" $newsImage
-          "alt" .Params.image
-          "class" "w-full h-auto object-cover object-top border border-gray-200")
-          }}
+          <img src="{{ $newsImage.RelPermalink }}"
+            alt="{{ .Params.image }}"
+            class="w-full h-auto object-cover object-top border border-gray-200 cursor-pointer"
+            onclick="openModal('{{ $newsImage.RelPermalink }}', '{{ .Params.image }}')">
           {{ end }}
         </div>
         {{ end }}
@@ -41,13 +41,13 @@
       </div>
       {{ if .Params.carousel }}
       <div class="mt-6">
-        <div class="flex flex-col md:flex-row md:items-end gap-1 w-full overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-end gap-2 md:gap-1 w-full overflow-hidden">
           {{ range $image := .Params.carousel }}
           {{ $carouselImage := resources.Get (printf "images/%s" $image) }}
           {{ if $carouselImage }}
           <img src="{{ $carouselImage.RelPermalink }}"
             alt="{{ $image }}"
-            class="h-80 w-auto object-contain cursor-pointer border border-gray-200"
+            class="w-full md:h-80 md:w-auto object-contain cursor-pointer md:border md:border-gray-200"
             onclick="openModal('{{ $carouselImage.RelPermalink }}', '{{ $image }}')">
           {{ end }}
           {{ end }}
