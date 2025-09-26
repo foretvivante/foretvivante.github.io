@@ -3,39 +3,57 @@
   <h1 class="text-3xl font-serif font-semibold pb-8">Actualités</h1>
   <div class="space-y-12">
     {{ range .Pages.ByDate.Reverse }}
-    <article class="space-y-1 flex flex-col pb-8 border-b border-gray-200 md:flex-row md:gap-5 scroll-mt-20"
+    <article class="space-y-1 pb-8 border-b border-gray-200 scroll-mt-20"
       id="{{ .File.ContentBaseName }}">
-      {{ if .Params.image }}
-      <div class="w-full md:basis-2/5">
-        {{ $newsImage := resources.Get (printf "images/%s" .Params.image) }}
+      <div class="flex flex-col md:flex-row md:gap-5">
+        {{ if .Params.image }}
+        <div class="w-full md:basis-2/5">
+          {{ $newsImage := resources.Get (printf "images/%s" .Params.image) }}
 
-        {{ if and $newsImage .Params.imageLink }}
-        <a href="{{ .Params.imageLink }}">
+          {{ if and $newsImage .Params.imageLink }}
+          <a href="{{ .Params.imageLink }}">
+            {{ partial "img.html"
+            (dict "image" $newsImage
+            "alt" .Params.image
+            "class" "w-full h-auto object-cover object-top border border-gray-200")
+            }}
+          </a>
+          {{ else if $newsImage }}
           {{ partial "img.html"
           (dict "image" $newsImage
           "alt" .Params.image
           "class" "w-full h-auto object-cover object-top border border-gray-200")
           }}
-        </a>
-        {{ else if $newsImage }}
-        {{ partial "img.html"
-        (dict "image" $newsImage
-        "alt" .Params.image
-        "class" "w-full h-auto object-cover object-top border border-gray-200")
-        }}
+          {{ end }}
+        </div>
         {{ end }}
+        <div
+          class="{{ if .Params.image }}md:basis-3/5{{ else }}w-full{{ end }} flex flex-col pt-1 md:pt-0 gap-1">
+          <div>
+            <a href="#{{ .File.ContentBaseName }}" class="text-sm text-gray-600 hover:underline">
+              {{ .Date | time.Format "2 January 2006"}}
+            </a>
+          </div>
+          <div class="prose prose-p:text-black prose-a:underline">
+            {{ .Content }}
+          </div>
+        </div>
+      </div>
+      {{ if .Params.carousel }}
+      <div class="mt-6">
+        <div class="flex flex-col md:flex-row md:items-end gap-1 w-full overflow-hidden">
+          {{ range $image := .Params.carousel }}
+          {{ $carouselImage := resources.Get (printf "images/%s" $image) }}
+          {{ if $carouselImage }}
+          <img src="{{ $carouselImage.RelPermalink }}"
+            alt="{{ $image }}"
+            class="h-80 w-auto object-contain cursor-pointer border border-gray-200"
+            onclick="openModal('{{ $carouselImage.RelPermalink }}', '{{ $image }}')">
+          {{ end }}
+          {{ end }}
+        </div>
       </div>
       {{ end }}
-      <div class="{{ if .Params.image }}md:basis-3/5{{ else }}w-full{{ end }} flex flex-col pt-1 md:pt-0 gap-1">
-        <div>
-          <a href="#{{ .File.ContentBaseName }}" class="text-sm text-gray-600 hover:underline">
-            {{ .Date | time.Format "2 January 2006"}}
-          </a>
-        </div>
-        <div class="prose prose-p:text-black prose-a:underline">
-          {{ .Content }}
-        </div>
-      </div>
     </article>
     {{ end }}
   </div>

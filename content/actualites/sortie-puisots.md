@@ -1,6 +1,10 @@
 ---
 date: 2025-09-26
 image: "puisots_2025-09-21_1.jpg"
+carousel: 
+  - "puisots_2025-09-21_2.jpg"
+  - "puisots_2025-09-21_3.jpg"
+  - "puisots_2025-09-21_4.jpg"
 draft: false
 ---
 Dimanche 21 septembre 2025 : la balade forestière aux Puisots (Semnoz) a réuni plus de 30 personnes, petits et grands !

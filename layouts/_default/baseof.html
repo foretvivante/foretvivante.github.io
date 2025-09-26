@@ -89,8 +89,8 @@
   <div id="imageModal" class="fixed inset-0 z-[60] hidden">
     <div class="absolute inset-0 bg-black/90" onclick="closeModal()"></div>
     <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
-      <div class="relative max-w-7xl max-h-[90vh] pointer-events-auto">
-        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain">
+      <div class="relative pointer-events-auto flex items-center justify-center">
+        <img id="modalImage" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain">
         <button onclick="closeModal()"
           class="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold shadow-lg hover:cursor-pointer">
           ×
@@ -150,6 +150,7 @@
         closeModal();
       }
     });
+
   </script>
 </body>
 
