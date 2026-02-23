@@ -34,8 +34,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore Astro build cache
+        id: astro-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ./node_modules/.astro
+          key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            astro-${{ runner.os }}-
+
       - name: Build with Astro
         run: npm run build
+
+      - name: Save Astro build cache
+        if: steps.astro-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ./node_modules/.astro
+          key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
