@@ -38,6 +38,7 @@ const montremontUrl = (await getImageUrl("montremont.jpg")) ?? "";
         class="h-4 w-4 inline-block"
         width={16}
         height={16}
+        priority
       />
     </h1>
   </div>
@@ -50,7 +51,7 @@ const montremontUrl = (await getImageUrl("montremont.jpg")) ?? "";
             <Image
               src={sentierLarrieux}
               alt="Sentier d'accès au refuge de Larrieux par la forêt"
-              loading="eager"
+              priority
               class="w-full h-full object-cover"
               width={800}
               height={600}
@@ -342,12 +343,14 @@ const montremontUrl = (await getImageUrl("montremont.jpg")) ?? "";
             un don à l'association pour participer au financement du projet : <a
               href="https://www.helloasso.com/associations/foret-vivante"
               class="underline"
-              >https://www.helloasso.com/associations/foret-vivante</a>
+              >https://www.helloasso.com/associations/foret-vivante</a
+            >
           </li>
           <li>
             devenir associé au sein du Groupement Forestier en nous envoyant un
             email à <a href="mailto:contact.gfv74@gmail.com" class="underline"
-              >contact.gfv74@gmail.com</a>
+              >contact.gfv74@gmail.com</a
+            >
           </li>
         </ul>
         <p>Merci de votre soutien !</p>
