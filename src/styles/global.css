@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@source "hugo_stats.json";
 
 @theme {
   --font-patuaone: "Patua One", serif;
