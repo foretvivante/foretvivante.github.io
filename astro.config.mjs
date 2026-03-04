@@ -7,7 +7,9 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.foretvivante.fr',
-
+  devToolbar: {
+    enabled: false
+  },
   image: {
     layout: 'constrained',
     responsiveStyles: true,
