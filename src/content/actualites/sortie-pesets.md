@@ -17,7 +17,7 @@ carousel:
   - "2026-03-01/IMG_20260301_125047.jpg"
 
 ---
-Dimanche 1er mars 2026 : Forêt Vivante a organisé une balade sur les parcelles du GFV 74 aux Pesets (vallée de Montremont, Thônes), suivie d'un pique-nique.
+Forêt Vivante a organisé une balade sur les parcelles du GFV 74 aux Pesets (vallée de Montremont, Thônes), suivie d'un pique-nique.
 
 <!--more-->
 La partie la plus basse des bois se situe à 740m d'altitude, la plus haute à environ 1130m.
