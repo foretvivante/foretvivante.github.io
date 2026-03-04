@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { getImageByFilename, getImageUrl } from "../utils/images";
+import Carousel from "../components/Carousel.astro";
 
 const actualites = (await getCollection("actualites"))
   .filter((a) => !a.data.draft)
@@ -14,10 +15,7 @@ const actualitesWithContent = await Promise.all(
     const imageUrl = item.data.image
       ? await getImageUrl(item.data.image)
       : undefined;
-    const carouselUrls = item.data.carousel
-      ? await Promise.all(item.data.carousel.map((name) => getImageUrl(name)))
-      : [];
-    return { ...item, Content, imageUrl, carouselUrls };
+    return { ...item, Content, imageUrl };
   }),
 );
 ---
@@ -30,105 +28,74 @@ const actualitesWithContent = await Promise.all(
     <h1 class="text-3xl font-serif font-semibold pb-8">Actualités</h1>
     <div class="space-y-8">
       {
-        actualitesWithContent.map(
-          ({ data, slug, Content, imageUrl, carouselUrls }) => {
-            const imageMeta = data.image
-              ? getImageByFilename(data.image)
-              : undefined;
-            const dateStr = data.date.toLocaleDateString("fr-FR", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            });
-            const safeImageAlt = (data.image ?? "").replace(/'/g, "\\'");
-            return (
-              <article
-                class="space-y-1 pb-12 border-b border-gray-200 scroll-mt-20"
-                id={slug}
-              >
-                <h2 class="my-2">
-                  <a
-                    href={`#${slug}`}
-                    class="text-lg font-bold hover:underline"
-                  >
-                    {dateStr}
-                  </a>
-                </h2>
+        actualitesWithContent.map(({ data, slug, Content, imageUrl }) => {
+          const imageMeta = data.image
+            ? getImageByFilename(data.image)
+            : undefined;
+          const dateStr = data.date.toLocaleDateString("fr-FR", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
+          const safeImageAlt = (data.image ?? "").replace(/'/g, "\\'");
+          return (
+            <article
+              class="space-y-1 pb-12 border-b border-gray-200 scroll-mt-20"
+              id={slug}
+            >
+              <h2 class="my-2">
+                <a href={`#${slug}`} class="text-lg font-bold hover:underline">
+                  {dateStr}
+                </a>
+              </h2>
 
-                <div class="flex flex-col md:flex-row md:gap-5">
-                  {imageMeta && (
-                    <div class="w-full md:basis-2/5">
-                      {data.imageLink ? (
-                        <a href={data.imageLink}>
-                          <Image
-                            src={imageMeta}
-                            alt={data.image ?? ""}
-                            class="w-full h-auto object-cover object-top border border-gray-200 cursor-pointer"
-                            width={400}
-                            height={300}
-                          />
-                        </a>
-                      ) : (
-                        <div
-                          onclick={
-                            imageUrl
-                              ? `openModal('${imageUrl}', '${safeImageAlt}')`
-                              : undefined
-                          }
-                          class="cursor-pointer"
-                        >
-                          <Image
-                            src={imageMeta}
-                            alt={data.image ?? ""}
-                            class="w-full h-auto object-cover object-top border border-gray-200"
-                            width={400}
-                            height={300}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  <div
-                    class={`${data.image ? "md:basis-3/5" : "w-full"} flex flex-col pt-1 md:pt-0 gap-1`}
-                  >
-                    <div class="prose prose-p:text-black prose-a:underline max-w-none">
-                      <Content />
-                    </div>
-                  </div>
-                </div>
-                {data.carousel && data.carousel.length > 0 && (
-                  <div class="mt-6">
-                    <div class="flex flex-col md:flex-row md:items-end gap-2 md:gap-1 w-full overflow-hidden">
-                      {data.carousel.map((image, i) => {
-                        const carouselMeta = getImageByFilename(image);
-                        const carouselUrl = carouselUrls[i];
-                        const safeAlt = image.replace(/'/g, "\\'");
-                        return carouselMeta ? (
-                          <div
-                            onclick={
-                              carouselUrl
-                                ? `openModal('${carouselUrl}', '${safeAlt}')`
-                                : undefined
-                            }
-                            class="cursor-pointer"
-                          >
-                            <Image
-                              src={carouselMeta}
-                              alt={image}
-                              class="w-full md:h-80 md:w-auto object-contain md:border md:border-gray-200"
-                              width={400}
-                              height={320}
-                            />
-                          </div>
-                        ) : null;
-                      })}
-                    </div>
+              <div class="flex flex-col md:flex-row md:gap-5">
+                {imageMeta && (
+                  <div class="w-full md:basis-2/5">
+                    {data.imageLink ? (
+                      <a href={data.imageLink}>
+                        <Image
+                          src={imageMeta}
+                          alt={data.image ?? ""}
+                          class="w-full h-auto object-cover object-top border border-gray-200 cursor-pointer"
+                          width={400}
+                          height={300}
+                        />
+                      </a>
+                    ) : (
+                      <div
+                        onclick={
+                          imageUrl
+                            ? `openModal('${imageUrl}', '${safeImageAlt}')`
+                            : undefined
+                        }
+                        class="cursor-pointer"
+                      >
+                        <Image
+                          src={imageMeta}
+                          alt={data.image ?? ""}
+                          class="w-full h-auto object-cover object-top border border-gray-200"
+                          width={400}
+                          height={300}
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
-              </article>
-            );
-          },
-        )
+                <div
+                  class={`${data.image ? "md:basis-3/5" : "w-full"} flex flex-col pt-1 md:pt-0 gap-1`}
+                >
+                  <div class="prose prose-p:text-black prose-a:underline max-w-none">
+                    <Content />
+                  </div>
+                </div>
+              </div>
+              {data.carousel && data.carousel.length > 0 && (
+                <Carousel images={data.carousel} />
+              )}
+            </article>
+          );
+        })
       }
     </div>
   </div>

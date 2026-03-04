@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets";
+import { getImageByFilename, getImageUrl } from "../utils/images";
+
+interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props;
+
+const items = await Promise.all(
+  images.map(async (image) => {
+    const meta = getImageByFilename(image);
+    const url = meta ? await getImageUrl(image) : undefined;
+    return { image, meta, url };
+  }),
+);
+---
+
+<div class="mt-6">
+  <div class="flex flex-col md:flex-row md:items-end gap-2 md:gap-1 w-full overflow-hidden">
+    {
+      items.map(({ image, meta, url }) =>
+        meta ? (
+          <div
+            onclick={url ? `openModal('${url}', '${image.replace(/'/g, "\\'")}')`  : undefined}
+            class="cursor-pointer"
+          >
+            <Image
+              src={meta}
+              alt={image}
+              class="w-full md:h-80 md:w-auto object-contain md:border md:border-gray-200"
+              width={400}
+              height={320}
+            />
+          </div>
+        ) : null,
+      )
+    }
+  </div>
+</div>

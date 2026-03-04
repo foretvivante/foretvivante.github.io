@@ -5,14 +5,23 @@ import { getImage } from 'astro:assets';
  * Uses import.meta.glob to enable dynamic image resolution from content.
  */
 const imageModules = import.meta.glob<{ default: import('astro').ImageMetadata }>(
-  '/src/assets/images/*.{jpg,jpeg,png,gif,webp,svg}',
+  '/src/assets/images/**/*.{jpg,jpeg,png,gif,webp,svg}',
   { eager: true }
 );
 
+const IMAGES_ROOT = '/src/assets/images/';
+
 const imageMap = new Map<string, import('astro').ImageMetadata>();
 for (const [path, mod] of Object.entries(imageModules)) {
+  if (!mod.default) continue;
+  // Store by relative path from images root (e.g. "2026-03-01/photo.jpg")
+  const relativePath = path.startsWith(IMAGES_ROOT)
+    ? path.slice(IMAGES_ROOT.length)
+    : path;
+  imageMap.set(relativePath, mod.default);
+  // Also store by filename alone for backward compatibility
   const filename = path.split('/').pop() ?? '';
-  if (mod.default) {
+  if (!imageMap.has(filename)) {
     imageMap.set(filename, mod.default);
   }
 }
