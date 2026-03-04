@@ -15,21 +15,28 @@ const items = await Promise.all(
     return { image, meta, url };
   }),
 );
+
+const hasPeekMobile = images.length > 2;
+const hasPeekDesktop = images.length > 4;
 ---
 
-<div class="mt-6">
-  <div class="flex flex-col md:flex-row md:items-end gap-2 md:gap-1 w-full overflow-hidden">
+<div class="mt-6 carousel-outer">
+  <div class="carousel-track">
     {
       items.map(({ image, meta, url }) =>
         meta ? (
           <div
-            onclick={url ? `openModal('${url}', '${image.replace(/'/g, "\\'")}')`  : undefined}
-            class="cursor-pointer"
+            onclick={
+              url
+                ? `openModal('${url}', '${image.replace(/'/g, "\\'")}')`
+                : undefined
+            }
+            class="carousel-item cursor-pointer"
           >
             <Image
               src={meta}
               alt={image}
-              class="w-full md:h-80 md:w-auto object-contain md:border md:border-gray-200"
+              class="carousel-image block w-full border border-gray-200"
               width={400}
               height={320}
             />
@@ -39,3 +46,49 @@ const items = await Promise.all(
     }
   </div>
 </div>
+
+<style
+  define:vars={{
+    hasPeekMobile: hasPeekMobile ? "1" : "0",
+    hasPeekDesktop: hasPeekDesktop ? "1" : "0",
+  }}
+>
+  .carousel-outer {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .carousel-outer::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-outer {
+      scrollbar-width: auto;
+    }
+
+    .carousel-outer::-webkit-scrollbar {
+      display: block;
+    }
+  }
+
+  .carousel-track {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .carousel-item {
+    flex-shrink: 0;
+    overflow: hidden;
+    scroll-snap-align: start;
+    width: calc((100% - (var(--hasPeekMobile) * 10%)) / 2);
+  }
+
+  @media (min-width: 768px) {
+    .carousel-item {
+      width: calc((100% - (var(--hasPeekDesktop) * 10%)) / 4);
+    }
+  }
+</style>

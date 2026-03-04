@@ -24,8 +24,8 @@ const actualitesWithContent = await Promise.all(
   title="Actualités"
   description="Actualités du projet Forêt Vivante. Gestion durable de la forêt en Haute-Savoie."
 >
-  <div class="container mx-auto px-4 pb-8">
-    <h1 class="text-3xl font-serif font-semibold pb-8">Actualités</h1>
+  <div class="container mx-auto pb-8">
+    <h1 class="text-3xl font-serif font-semibold px-4 pb-8">Actualités</h1>
     <div class="space-y-8">
       {
         actualitesWithContent.map(({ data, slug, Content, imageUrl }) => {
@@ -43,7 +43,7 @@ const actualitesWithContent = await Promise.all(
               class="space-y-1 pb-12 border-b border-gray-200 scroll-mt-20"
               id={slug}
             >
-              <h2 class="my-2">
+              <h2 class="my-2 px-4 ">
                 <a href={`#${slug}`} class="text-lg font-bold hover:underline">
                   {dateStr}
                 </a>
@@ -85,7 +85,7 @@ const actualitesWithContent = await Promise.all(
                 <div
                   class={`${data.image ? "md:basis-3/5" : "w-full"} flex flex-col pt-1 md:pt-0 gap-1`}
                 >
-                  <div class="prose prose-p:text-black prose-a:underline max-w-none">
+                  <div class="px-4 prose prose-p:text-black prose-a:underline max-w-none">
                     <Content />
                   </div>
                 </div>
