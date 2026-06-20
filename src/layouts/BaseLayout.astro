@@ -168,18 +168,35 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site);
         const modal = document.getElementById("imageModal");
         const modalImage = document.getElementById("modalImage");
         if (modal && modalImage) {
-          modalImage.src = imageSrc;
+          modalImage.onload = null;
+          modalImage.src = "";
           modalImage.alt = imageAlt;
+          modalImage.style.visibility = "hidden";
           modal.classList.remove("hidden");
           document.body.style.overflow = "hidden";
+
+          const showImage = () => {
+            modalImage.style.visibility = "visible";
+          };
+          modalImage.onload = showImage;
+          modalImage.src = imageSrc;
+          if (modalImage.complete && modalImage.naturalWidth > 0) {
+            showImage();
+          }
         }
       }
 
       function closeModal() {
         const modal = document.getElementById("imageModal");
+        const modalImage = document.getElementById("modalImage");
         if (modal) {
           modal.classList.add("hidden");
           document.body.style.overflow = "auto";
+          if (modalImage) {
+            modalImage.onload = null;
+            modalImage.src = "";
+            modalImage.style.visibility = "hidden";
+          }
         }
       }
 
