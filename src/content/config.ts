@@ -6,6 +6,7 @@ const actualitesCollection = defineCollection({
     date: z.coerce.date(),
     image: z.string().optional(),
     imageLink: z.string().optional(),
+    imageLegend: z.string().optional(),
     carousel: z.array(z.string()).optional(),
     draft: z.boolean().optional(),
   }),

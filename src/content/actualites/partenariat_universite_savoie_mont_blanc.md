@@ -1,6 +1,7 @@
 ---
 date: 2026-09-12
 image: "sortie_larrieux_USMB.jpg"
+imageLegend: "Crédit photo : Bruno Berthier"
 draft: false
 ---
 Partenariat Forêt Vivante / Université Savoie Mont Blanc.
