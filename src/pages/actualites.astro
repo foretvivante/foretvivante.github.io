@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { getImageByFilename, getImageUrl } from "../utils/images";
 import Carousel from "../components/Carousel.astro";
+import YoutubeCover from "../components/YoutubeCover.astro";
 
 const actualites = (await getCollection("actualites"))
   .filter((a) => !a.data.draft)
@@ -50,7 +51,16 @@ const actualitesWithContent = await Promise.all(
               </h2>
 
               <div class="flex flex-col md:flex-row md:gap-5">
-                {imageMeta && (
+                {data.youtube ? (
+                  <figure class="w-full md:basis-2/5">
+                    <YoutubeCover url={data.youtube} class="aspect-video" />
+                    {data.imageLegend && (
+                      <figcaption class="mt-1 px-4 md:px-0 text-sm italic text-gray-600">
+                        {data.imageLegend}
+                      </figcaption>
+                    )}
+                  </figure>
+                ) : imageMeta && (
                   <figure class="w-full md:basis-2/5">
                     {data.imageLink ? (
                       <a href={data.imageLink}>
@@ -88,7 +98,7 @@ const actualitesWithContent = await Promise.all(
                   </figure>
                 )}
                 <div
-                  class={`${data.image ? "md:basis-3/5" : "w-full"} flex flex-col pt-1 md:pt-0 gap-1`}
+                  class={`${data.image || data.youtube ? "md:basis-3/5" : "w-full"} flex flex-col pt-1 md:pt-0 gap-1`}
                 >
                   <div class="px-4 prose prose-p:text-black prose-a:underline max-w-none">
                     <Content />

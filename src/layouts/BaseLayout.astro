@@ -163,7 +163,56 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site);
       </div>
     </div>
 
+    <div id="videoModal" class="fixed inset-0 z-[60] hidden">
+      <div
+        class="absolute inset-0 bg-black/90"
+        onclick="closeVideoModal()"
+      >
+      </div>
+      <div
+        class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none"
+      >
+        <div class="relative pointer-events-auto w-full max-w-5xl">
+          <iframe
+            id="videoModalPlayer"
+            src="about:blank"
+            title="Vidéo YouTube"
+            class="w-full aspect-video max-h-[90vh] bg-black"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowfullscreen></iframe>
+          <button
+            onclick="closeVideoModal()"
+            class="absolute -top-10 right-0 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold shadow-lg hover:cursor-pointer"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script is:inline>
+      function openVideoModal(event, embedUrl) {
+        const modal = document.getElementById("videoModal");
+        const player = document.getElementById("videoModalPlayer");
+        // Let ctrl/cmd-click open YouTube in a new tab as a regular link
+        if (!modal || !player || event.metaKey || event.ctrlKey) return;
+        event.preventDefault();
+        player.src = embedUrl;
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeVideoModal() {
+        const modal = document.getElementById("videoModal");
+        const player = document.getElementById("videoModalPlayer");
+        if (modal) {
+          modal.classList.add("hidden");
+          document.body.style.overflow = "auto";
+        }
+        // Unload the player to stop playback
+        if (player) player.src = "about:blank";
+      }
+
       function openModal(imageSrc, imageAlt) {
         const modal = document.getElementById("imageModal");
         const modalImage = document.getElementById("modalImage");
@@ -223,7 +272,10 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site);
       });
 
       document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") closeModal();
+        if (event.key === "Escape") {
+          closeModal();
+          closeVideoModal();
+        }
       });
     </script>
   </body>
