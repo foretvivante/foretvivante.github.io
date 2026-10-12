@@ -5,7 +5,7 @@ image: "ultra-treeathlon.jpg"
 ---
 10 ironman en 30 jours. 2300km avec un rondin de bois sur le dos pour alerter sur l'état des forêts.
 <!--more-->
-C'est le défi d'[Antoine Ofcard](https://www.linkedin.com/in/antoineofcard/), ingénieur et aventurier MAIF Sport Planète. Parti d'Annecy le 19 septembre, il file vers Fontainebleau avec un tronc d'épicéa tué par les scolytes : 38 km de natation, 1 800 km à vélo et 10 marathons. Un symbole fort, alors que la mortalité des arbres a bondi de 125 % en dix ans en France.
+C'est le défi d'[Antoine Ofcard](https://www.linkedin.com/in/antoineofcard/), ingénieur et aventurier MAIF Sport Planète. Parti d'Annecy le 19 septembre, il file vers Fontainebleau avec un tronc d'épicéa tué par les scolytes : 38 km de natation, 1 800 km à vélo et 10 marathons. Un symbole fort, alors que la mortalité des arbres a bondi de 125% en dix ans en France.
 
 #### Notre forêt à l'honneur dès la première étape
 
