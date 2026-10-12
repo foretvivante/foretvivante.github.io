@@ -36,7 +36,7 @@ jobs:
 
       - name: Restore Astro build cache
         id: astro-cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ./node_modules/.astro
           key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
@@ -54,7 +54,7 @@ jobs:
           key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
 
