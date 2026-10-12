@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "engines": {
-    "node": "24.x"
+    "node": "26.x"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
