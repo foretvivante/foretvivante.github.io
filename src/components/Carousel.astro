@@ -26,11 +26,10 @@ const hasPeekDesktop = images.length > 4;
       items.map(({ image, meta, url }) =>
         meta ? (
           <div
-            onclick={
-              url
-                ? `openModal('${url}', '${image.replace(/'/g, "\\'")}')`
-                : undefined
-            }
+            data-src={url}
+            data-alt={image}
+            onclick={url ? "openCarouselImage(this)" : undefined}
+            onmouseenter={url ? "preloadImage(this.dataset.src)" : undefined}
             class="carousel-item cursor-pointer"
           >
             <Image

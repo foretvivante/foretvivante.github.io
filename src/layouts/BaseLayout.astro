@@ -179,6 +179,27 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site);
           </button>
         </div>
       </div>
+      <button
+        id="modalPrev"
+        onclick="showGalleryImage(-1)"
+        aria-label="Image précédente"
+        style="display: none" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold shadow-lg hover:cursor-pointer"
+      >
+        ‹
+      </button>
+      <button
+        id="modalNext"
+        onclick="showGalleryImage(1)"
+        aria-label="Image suivante"
+        style="display: none" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold shadow-lg hover:cursor-pointer"
+      >
+        ›
+      </button>
+      <div
+        id="modalCounter"
+        style="display: none" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm"
+      >
+      </div>
     </div>
 
     <div id="videoModal" class="fixed inset-0 z-[60] hidden">
@@ -231,11 +252,82 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site);
         if (player) player.src = "about:blank";
       }
 
+      // Images of the carousel currently browsed in the modal, if any
+      let galleryItems = [];
+      let galleryIndex = 0;
+
+      function setGalleryControlsVisible(visible) {
+        ["modalPrev", "modalNext", "modalCounter"].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = visible ? "" : "none";
+        });
+      }
+
+      function openCarouselImage(item) {
+        const track = item.closest(".carousel-track");
+        galleryItems = track
+          ? Array.from(track.querySelectorAll(".carousel-item[data-src]"))
+          : [item];
+        galleryIndex = Math.max(0, galleryItems.indexOf(item));
+        setGalleryControlsVisible(galleryItems.length > 1);
+        showGalleryImage(0);
+        preloadGallery();
+      }
+
+      // Full-size images already requested, kept referenced so that they stay
+      // decoded in memory and can be displayed instantly
+      const preloadedImages = new Map();
+
+      function preloadImage(src) {
+        if (!src || preloadedImages.has(src)) return;
+        const img = new Image();
+        img.src = src;
+        img.decode().catch(() => {});
+        preloadedImages.set(src, img);
+      }
+
+      // Preload the whole gallery, closest images to the current one first
+      function preloadGallery() {
+        const count = galleryItems.length;
+        for (let d = 1; d <= count / 2; d++) {
+          preloadImage(galleryItems[(galleryIndex + d) % count].dataset.src);
+          preloadImage(
+            galleryItems[(galleryIndex - d + count) % count].dataset.src,
+          );
+        }
+      }
+
+      function showGalleryImage(offset) {
+        if (galleryItems.length === 0) return;
+        const count = galleryItems.length;
+        galleryIndex = (galleryIndex + offset + count) % count;
+        const item = galleryItems[galleryIndex];
+        const counter = document.getElementById("modalCounter");
+        if (counter) counter.textContent = `${galleryIndex + 1} / ${count}`;
+        displayModalImage(item.dataset.src, item.dataset.alt || "");
+      }
+
       function openModal(imageSrc, imageAlt) {
+        galleryItems = [];
+        setGalleryControlsVisible(false);
+        displayModalImage(imageSrc, imageAlt);
+      }
+
+      function displayModalImage(imageSrc, imageAlt) {
         const modal = document.getElementById("imageModal");
         const modalImage = document.getElementById("modalImage");
         if (modal && modalImage) {
           modalImage.onload = null;
+          const preloaded = preloadedImages.get(imageSrc);
+          if (preloaded && preloaded.complete && preloaded.naturalWidth > 0) {
+            // Already loaded: swap without blanking the modal
+            modalImage.src = imageSrc;
+            modalImage.alt = imageAlt;
+            modalImage.style.visibility = "visible";
+            modal.classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+            return;
+          }
           modalImage.src = "";
           modalImage.alt = imageAlt;
           modalImage.style.visibility = "hidden";
@@ -256,6 +348,8 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site);
       function closeModal() {
         const modal = document.getElementById("imageModal");
         const modalImage = document.getElementById("modalImage");
+        galleryItems = [];
+        setGalleryControlsVisible(false);
         if (modal) {
           modal.classList.add("hidden");
           document.body.style.overflow = "auto";
@@ -293,6 +387,13 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site);
         if (event.key === "Escape") {
           closeModal();
           closeVideoModal();
+        } else if (
+          (event.key === "ArrowLeft" || event.key === "ArrowRight") &&
+          galleryItems.length > 1 &&
+          !document.getElementById("imageModal")?.classList.contains("hidden")
+        ) {
+          event.preventDefault();
+          showGalleryImage(event.key === "ArrowLeft" ? -1 : 1);
         }
       });
     </script>
