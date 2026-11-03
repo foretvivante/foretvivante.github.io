@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { getImageByFilename, getImageUrl } from "../utils/images";
 import Carousel from "../components/Carousel.astro";
 import YoutubeCover from "../components/YoutubeCover.astro";
@@ -12,7 +12,7 @@ const actualites = (await getCollection("actualites"))
 
 const actualitesWithContent = await Promise.all(
   actualites.map(async (item) => {
-    const { Content } = await item.render();
+    const { Content } = await render(item);
     const imageUrl = item.data.image
       ? await getImageUrl(item.data.image)
       : undefined;
@@ -29,7 +29,7 @@ const actualitesWithContent = await Promise.all(
     <h1 class="text-3xl font-serif font-semibold px-4 pb-8">Actualités</h1>
     <div class="space-y-8">
       {
-        actualitesWithContent.map(({ data, slug, Content, imageUrl }) => {
+        actualitesWithContent.map(({ data, id, Content, imageUrl }) => {
           const imageMeta = data.image
             ? getImageByFilename(data.image)
             : undefined;
@@ -42,10 +42,10 @@ const actualitesWithContent = await Promise.all(
           return (
             <article
               class="space-y-1 pb-12 border-b border-gray-200 scroll-mt-20"
-              id={slug}
+              id={id}
             >
               <h2 class="my-2 px-4 font-serif ">
-                <a href={`#${slug}`} class="text-lg font-bold hover:underline">
+                <a href={`#${id}`} class="text-lg font-bold hover:underline">
                   {dateStr}
                 </a>
               </h2>

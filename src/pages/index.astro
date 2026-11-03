@@ -113,7 +113,7 @@ const montremontUrl = (await getImageUrl("montremont.jpg")) ?? "";
       <div class="flex flex-col md:flex-row gap-10 md:gap-4 place-items-start">
         {
           actualitesWithUrls.map((item) => {
-            const { data, slug, body } = item;
+            const { data, id, body } = item;
             const imageMeta = data.image
               ? getImageByFilename(data.image)
               : undefined;
@@ -133,7 +133,7 @@ const montremontUrl = (await getImageUrl("montremont.jpg")) ?? "";
                   {data.youtube ? (
                     <YoutubeCover url={data.youtube} class="h-48" />
                   ) : imageMeta && (
-                    <a href={`/actualites#${slug}`}>
+                    <a href={`/actualites#${id}`}>
                       <Image
                         src={imageMeta}
                         alt={data.image ?? ""}
@@ -151,7 +151,7 @@ const montremontUrl = (await getImageUrl("montremont.jpg")) ?? "";
                   </p>
                   {truncated && (
                     <div class="mt-2 text-gray-600">
-                      <a href={`/actualites#${slug}`} class="underline">
+                      <a href={`/actualites#${id}`} class="underline">
                         Lire la suite
                       </a>{" "}
                       →

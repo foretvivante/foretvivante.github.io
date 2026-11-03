@@ -1,8 +1,11 @@
-import { defineCollection, z } from 'astro:content';
-import { getYoutubeVideoId } from '../utils/youtube';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+import { getYoutubeVideoId } from './utils/youtube';
 
 const actualitesCollection = defineCollection({
-  type: 'content',
+  // Files starting with "_" (e.g. _index.md) are excluded, as with legacy collections
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/actualites' }),
   schema: z.object({
     date: z.coerce.date(),
     image: z.string().optional(),
@@ -10,7 +13,6 @@ const actualitesCollection = defineCollection({
     imageLegend: z.string().optional(),
     carousel: z.array(z.string()).optional(),
     youtube: z
-      .string()
       .url()
       .refine((url) => getYoutubeVideoId(url) !== undefined, {
         message: 'Invalid YouTube video URL',
